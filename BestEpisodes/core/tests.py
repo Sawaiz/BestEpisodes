@@ -58,10 +58,4 @@ class HomePageTest(TestCase):
 
 #Test for episode detail page
 
-
-
-
-
-
-
-
+#test deltas for games

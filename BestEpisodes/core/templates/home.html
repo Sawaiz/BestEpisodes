@@ -1,30 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block body_block %}
 
-{% block body_block %}
-
-<div class = "container">
+<div class="container">
     <h1>Which episode is better?</h1>
 
-    <div class = "row">
-        <div class = "col sm12 m4">
-            <div class = "card ">
-                <div class = "card-image">
+    <div class="row">
+        <div class="col sm12 m4">
+            <div class="card ">
+                <div class="card-image">
                     <img src="{{first_episode.image}}">
                 </div>
-                <div class = "card-content">
+                <div class="card-content">
                     <p>
-                        <strong>S{{first_episode.season}}E{{first_episode.episode}}: {{first_episode.title}}</strong>
+                        <strong><a href="/episode/{{first_episode.id}}">S{{first_episode.season}}E{{first_episode.episode}}:
+                            {{first_episode.title}}</a></strong>
+                        <br>
+                        <br> {{first_episode.plot}}
                         <br>
                         <br>
-                        {{first_episode.plot}}
-                        <br>
-                        <br>
-                       <strong>Rating</strong>: {{first_episode.rating}}
-                        <br>
-                        <form  action="/" method="post">{% csrf_token %}
-                            <input type = "hidden" value="{{first_episode.title}}" name = "first_episode_title">
-                            <input type = "hidden" value="{{second_episode.title}}" name = "second_episode_title">
-                            <button class="btn waves-effect waves-dark green"  type="submit" name="episode-1-selected">S{{first_episode.season}}
+                        <form action="/" method="post">{% csrf_token %}
+                            <input type="hidden" value="{{first_episode.title}}" name="first_episode_title">
+                            <input type="hidden" value="{{second_episode.title}}" name="second_episode_title">
+                            <button class="btn waves-effect waves-dark green" type="submit" name="episode-1-selected">S{{first_episode.season}}
                                 E{{first_episode.episode}}
                                 <i class="material-icons right">thumb_up</i>
                             </button>
@@ -35,27 +31,23 @@
 
             </div>
         </div>
-        <div class = "col sm12 m4">
-            <div class = "card ">
-                <div class = "card-image">
+        <div class="col sm12 m4">
+            <div class="card ">
+                <div class="card-image">
                     <img src="{{second_episode.image}}">
                 </div>
-                <div class = "card-content">
+                <div class="card-content">
                     <p>
-                        <strong>S{{second_episode.season}}E{{second_episode.episode}}: {{second_episode.title}}</strong>
+                        <strong><a href="/episode/{{second_episode.id}}">S{{second_episode.season}}E{{second_episode.episode}}
+                            : {{second_episode.title}}</a></strong>
+                        <br>
+                        <br> {{second_episode.plot}}
                         <br>
                         <br>
-                        {{second_episode.plot}}
-                        <br>
-                        <br>
-                        <strong>Rating</strong>: {{second_episode.rating}}
-                        <br>
-
-                        <form  action="/" method="post">{% csrf_token %}
-                            <input type = "hidden" value="{{first_episode.title}}" name = "first_episode_title">
-                            <input type = "hidden" value="{{second_episode.title}}" name = "second_episode_title">
-                            <button class="btn waves-effect waves-dark green" type="submit"
-                                    name="episode-2-selected">S{{second_episode.season}}
+                        <form action="/" method="post">{% csrf_token %}
+                            <input type="hidden" value="{{first_episode.title}}" name="first_episode_title">
+                            <input type="hidden" value="{{second_episode.title}}" name="second_episode_title">
+                            <button class="btn waves-effect waves-dark green" type="submit" name="episode-2-selected">S{{second_episode.season}}
                                 E{{second_episode.episode}}
                                 <i class="material-icons right">thumb_up</i>
                             </button>
@@ -66,22 +58,21 @@
             </div>
         </div>
     </div>
-    <div class = "row">
-        <form  action="/" method="post">{% csrf_token %}
-            <input type = "hidden" value="{{first_episode.title}}" name = "first_episode_title">
-            <input type = "hidden" value="{{second_episode.title}}" name = "second_episode_title">
+    <div class="row">
+        <form action="/" method="post">{% csrf_token %}
+            <input type="hidden" value="{{first_episode.title}}" name="first_episode_title">
+            <input type="hidden" value="{{second_episode.title}}" name="second_episode_title">
             <button class="btn waves-effect waves-dark blue" type="submit" name="draw">Tie
                                 <i class="material-icons right">thumb_up_thumb_down</i>
             </button>
         </form>
     </div>
-    <div class = "row">
-        <a href="/" class="btn waves-effect waves-dark blue" id="skip" type="submit"
-                                    name="action">Skip
+    <div class="row">
+        <a href="/" class="btn waves-effect waves-dark blue" id="skip" type="submit" name="action">Skip
                                 <i class="material-icons right">navigate_next</i>
                             </a>
     </div>
-<div>
+    <div>
 
 
-{% endblock %}
+        {% endblock %}
