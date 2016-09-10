@@ -2,6 +2,7 @@
 *.pyc
 db
 _*
-static
 migrations
 log.txt
+static/images/*
+BestEpisodes/BestEpisodes/settings.py
