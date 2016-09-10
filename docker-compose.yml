@@ -1,0 +1,37 @@
+version: "2"
+
+services:
+
+  nginx:
+    build: ./nginx
+    # logging:
+    #   driver: "none"
+    volumes:
+      - ./nginx/app:/usr/share/nginx/html:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - django
+
+  django:
+    build: ./BestEpisodes
+    volumes:
+      - ./BestEpisodes:/usr/src/app:ro
+    links:
+      - db
+    ports:
+      - "8000:8000"
+      - "5000:5000"
+
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=bestEpisodesRoot
+      - MYSQL_DATABASE=episodes
+      - MYSQL_USER=bestEpisodes
+      - MYSQL_PASSWORD=bestEpisodesUser
+    volumes:
+      - ./db:/var/lib/mysql:rw
+    ports: 
+      - "3306:3306"

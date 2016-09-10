@@ -18,3 +18,21 @@ Here are a few issues with 1-10 ratings:
 * Ratings can fluctuate based on mood, recent experiences, etc. since they are based on changing expectations. The result of comparing two episodes head-to-head is an objective measure. Your criteria may be subjective, but the conclusion you come to based on that criteria is objective--episode X is better than episode Y. And unless your criteria changes (not common for TV episodes), that's an objective "truth".  
 
 **TODO: Simplify readme text!**
+
+## Installation
+The structure consists of a nginx proxy with (any number of) django nodes all communicating to a single mysql database as the backend.
+
+For setup, add a secret key as the string on line 23 of the settings.py file.
+
+Then just run 
+```bash
+docker-compose up --build
+docker exec bestepisodes_django_1 python manage.py migrate
+```
+Then ```CTRL+C``` and run ```docker-compose up``` again.
+In the directory, and it will build and serve the webpage.
+
+If you need to scale the application
+```bash
+docker scale django=32
+```

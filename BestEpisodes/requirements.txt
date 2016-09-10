@@ -1,0 +1,12 @@
+# Install everything that needs to be compiled
+
+# Django stuff
+Django>=1.8
+
+#Database Adapter
+mysqlclient
+
+#Pillow
+pillow
+requests
+shutilwhich
