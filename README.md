@@ -26,8 +26,16 @@ For setup, add a secret key as the string on line 23 of the settings.py file.
 
 Then just run 
 ```bash
-docker-compose up --build
-docker exec -it bestepisodes_django_1 python manage.py makemigrations
+ apt-get update
+apt-get install git
+#This is a terrible idea, but I'm doing it anyway
+#Official docker install script
+curl https://get.docker.com/ | sh
+#Unoffical compose script
+curl https://gist.githubusercontent.com/wdullaer/f1af16bd7e970389bad3/raw/40040ee14c0ce545b11f7aee44fb28074d1fc588/install.sh | sh
+git clone www.github.com/Sawaiz/BestEpisodes.git
+docker-compose up --build &
+docker exec -it bestepisodes_django_1 python manage.py makemigrations core
 docker exec -it bestepisodes_django_1 python manage.py migrate
 docker exec -it bestepisodes_django_1 python manage.py download_episodes tt3230780
 ```

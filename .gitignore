@@ -4,4 +4,4 @@ db
 _*
 migrations
 log.txt
-static/images/*
+static

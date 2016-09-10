@@ -13,5 +13,8 @@ MAINTAINER sawaiz@sawaizsyed.com
 # Working directory
 WORKDIR /usr/src/app
 
+# Expose port of django, 8000 was giving me errors
+EXPOSE 5000
+
 # Start nginx
 ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:5000"]
