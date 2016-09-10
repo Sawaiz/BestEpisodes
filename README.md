@@ -26,23 +26,26 @@ For setup, add a secret key as the string on line 23 of the settings.py file.
 
 Then just run 
 ```bash
- apt-get update
+apt-get update
 apt-get install git
 #This is a terrible idea, but I'm doing it anyway
 #Official docker install script
-curl https://get.docker.com/ | sh
-#Unoffical compose script
+#curl https://get.docker.com/ | sh
+#But better Unoffical compose script
 curl https://gist.githubusercontent.com/wdullaer/f1af16bd7e970389bad3/raw/40040ee14c0ce545b11f7aee44fb28074d1fc588/install.sh | sh
-git clone www.github.com/Sawaiz/BestEpisodes.git
+git clone http://www.github.com/Sawaiz/BestEpisodes.git
+cd BestEpisodes
+#Edit the settings fine with your Secret key
+nano BestEpisodes/BestEpisodes/settings.py
 docker-compose up --build &
 docker exec -it bestepisodes_django_1 python manage.py makemigrations core
 docker exec -it bestepisodes_django_1 python manage.py migrate
+#Here is where you select what show you use
 docker exec -it bestepisodes_django_1 python manage.py download_episodes tt3230780
 ```
-Then ```CTRL+C``` and run ```docker-compose up``` again.
-In the directory, and it will build and serve the webpage.
 
-If you need to scale the application
+
+If you need to scale the application (not working properly for some reason always hitting #1 and not load balancing)
 ```bash
-docker scale django=32
+docker scale django=4
 ```
