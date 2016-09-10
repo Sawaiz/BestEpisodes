@@ -4,10 +4,10 @@ services:
 
   nginx:
     build: ./nginx
-    # logging:
-    #   driver: "none"
+    logging:
+      driver: "none"
     volumes:
-      - ./BestEpisodes/static:/usr/share/nginx/html:ro
+      - ./BestEpisodes/static:/usr/share/nginx/html/static:ro
     ports:
       - "80:80"
       - "443:443"
