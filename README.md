@@ -28,6 +28,7 @@ Then just run
 ```bash
 docker-compose up --build
 docker exec bestepisodes_django_1 python manage.py migrate
+docker exec bestepisodes_django_1 python manage.py download_episodes tt3230780
 ```
 Then ```CTRL+C``` and run ```docker-compose up``` again.
 In the directory, and it will build and serve the webpage.

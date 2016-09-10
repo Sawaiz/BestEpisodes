@@ -4,8 +4,8 @@ services:
 
   nginx:
     build: ./nginx
-    # logging:
-    #   driver: "none"
+    logging:
+      driver: "none"
     volumes:
       - ./nginx/app:/usr/share/nginx/html:ro
     ports:
@@ -17,12 +17,9 @@ services:
   django:
     build: ./BestEpisodes
     volumes:
-      - ./BestEpisodes:/usr/src/app:ro
+      - ./BestEpisodes:/usr/src/app:rw
     links:
       - db
-    ports:
-      - "8000:8000"
-      - "5000:5000"
 
   db:
     image: mysql

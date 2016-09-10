@@ -13,9 +13,5 @@ MAINTAINER sawaiz@sawaizsyed.com
 # Working directory
 WORKDIR /usr/src/app
 
-# Expose the default ports
-EXPOSE 8000
-EXPOSE 5000
-
 # Start nginx
 ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:5000"]

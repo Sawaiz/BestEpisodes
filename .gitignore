@@ -1,3 +1,7 @@
 .idea/*
 *.pyc
-BestEpisodes/BestEpisodes/settings.py
+db
+_*
+static
+migrations
+log.txt

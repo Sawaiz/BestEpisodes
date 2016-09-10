@@ -1,23 +1,33 @@
 #A script to download all episode data and load it into the database
-import requests, shutil
+from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
 from core.models import Episode
+import requests, shutil
+import os
 
+class Command(BaseCommand):
 
-#Fetches number of seasons for series
-response = requests.get('http://www.omdbapi.com/?t=The%20Simpsons').json()
-seasons = int(response['totalSeasons'])
+    help = "A script to download all episode data and load it into the database"
 
+    def add_arguments(self, parser):
+        parser.add_argument('imdb_id', nargs='?', default='tt3230780', help='Find the show on IMDB, then take the id, www.imdb/title/<imdb id>/***')
 
-def download():
+    def handle(self, *args, **options):
+        download(options['imdb_id'])        
+
+def download(imdb_id):
     print("download has begun")
+    #Fetches number of seasons for series
+    response = requests.get('http://www.omdbapi.com/?i='+imdb_id).json()
+    seasons = int(response['totalSeasons'])
     for season in range(seasons):
         print("now downloading season " + str(season + 1))
-        season_url = 'http://www.omdbapi.com/?t=The%20Simpsons&Season=' + str(season + 1)
+        season_url = 'http://www.omdbapi.com/?i='+imdb_id+'&Season=' + str(season + 1)
         season_data = requests.get(season_url).json()
         num_episodes = len(season_data['Episodes'])
 
         for episode in range(num_episodes):
-           try:
+            try:
                 episode_data = requests.get(season_url + '&Episode=' + str(episode + 1)).json()
                 new_episode = Episode()
                 new_episode.imdb_id = episode_data['imdbID']
@@ -30,6 +40,8 @@ def download():
                 new_episode.rating = 1000
 
                 response = requests.get(episode_data['Poster'], stream=True)
+                if not os.path.exists('static/images'):
+                    os.makedirs('static/images')
                 with open('static/images/S'+str(season + 1)+'E'+str(episode + 1)+'.jpg', 'wb') as out_file:
                     shutil.copyfileobj(response.raw, out_file)
                 new_episode.image = '../static/images/S'+str(season + 1)+'E'+str(episode + 1)+'.jpg'
@@ -38,24 +50,11 @@ def download():
 
                 print("Just completed S" +str(season + 1)+"E"+str(episode + 1))
 
-           except:
-               log = open('log.txt', 'w')
-               log.write('Exception occurred on Season ' + str(season + 1) + ' episode ' + str(episode + 1))
-               print('Exception occurred on Season ' + str(season + 1) + ' episode ' + str(episode + 1))
-               continue
-
-
-
-
-
-
-
-
-
-
-
-
-
+            except:
+                log = open('log.txt', 'w')
+                log.write('Exception occurred on Season ' + str(season + 1) + ' episode ' + str(episode + 1))
+                print('Exception occurred on Season ' + str(season + 1) + ' episode ' + str(episode + 1))
+                continue
 
 
 
