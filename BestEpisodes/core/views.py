@@ -52,14 +52,21 @@ def home(request):
     episodeid_1, episodeid_2 = get_episodes()
     first_episode = Episode.objects.all()[episodeid_1]
     second_episode = Episode.objects.all()[episodeid_2]
-    context = {'first_episode': first_episode, 'second_episode':second_episode}
+    context = {'first_episode': first_episode, 'second_episode':second_episode, 'series':first_episode.series}
 
     return render(request, 'home.html', context)
 
 def rankings(request):
     episodes = Episode.objects.all().order_by('-rating')
-    context = {'episodes_list': episodes}
+    series = Episode.objects.get(pk=1).series
+    context = {'episodes_list': episodes, 'series':series}
     return render(request, 'rankings.html', context)
+
+def about(request):
+    series = Episode.objects.get(pk=1).series
+    context = {'series':series}
+    return render(request, 'about.html', context)
+
 
 # URL with no slug, redirect to url with slug
 def episode_detail_no_slug(request, episode_id):
