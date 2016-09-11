@@ -10,7 +10,7 @@
   <!-- Material Design icon font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <title>{% block title_block %}Rate {{seriesName}} {% endblock %}</title>
+  <title>{% block title_block %}Rate {{episode.series}} {% endblock %}</title>
   {% block head_block%}{% endblock %}
 </head>
 
@@ -23,7 +23,7 @@
       </a>
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title ">Rate {{seriesName}}</span>
+        <span class="mdl-layout-title ">Rate {{episode.series}}</span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->

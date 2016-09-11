@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {%block title_block%} {{seriesName}} Episode Rankings {% endblock %} {%block body_block%}
+{% extends 'base.html' %} {%block title_block%} {{episode.series}} Episode Rankings {% endblock %} {%block body_block%}
 
 <style>
     .ranking-title {
@@ -14,7 +14,7 @@
 <div class="mdl-grid">
     <div class="mdl-layout-spacer"></div>
     <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-        <h3 class="ranking-title">{{seriesName}} Episode Rankings</h3>
+        <h3 class="ranking-title">{{episode.series}} Episode Rankings</h3>
         <table class="ranking-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>

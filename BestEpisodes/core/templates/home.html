@@ -11,13 +11,13 @@
         font-size: 4vh;
         line-height: 5vh;
     }
-
+    
     .skip-tie-card {
-        width:100%;
+        width: 100%;
         min-height: 0;
     }
     
-    .skipTieIcon {
+    .skip-tie-icon {
         font-size: 3vh;
     }
     
@@ -33,49 +33,43 @@
         line-height: 5vw;
     }
     
-    .episode_grid {
+    .episode-grid {
         height: 64vh;
-    }
-    
-    .episode-card.mdl-card {
-        width: 100%;
-        height: 100%;
     }
     
     .episode-card > .mdl-card__menu {
         color: #fff;
     }
-
-    .mdl-card__title{
-        text-decoration: none;                        
-    }
     
     .episode-a-card > .mdl-card__title {
-        color: #fff;
-        height: 100%;
         background: url({{first_episode.image}}) center / cover;
     }
     
     .episode-b-card > .mdl-card__title {
+        background: url({{second_episode.image}}) center / cover;
+    }
+    
+    .episode-card > .mdl-card__title {
         color: #fff;
         height: 100%;
-        background: url({{second_episode.image}}) center / cover;
+        text-decoration: none;
+    }
+    
+    .episode-card {
+        width: 100%;
+        height: 100%;
     }
 </style>
 
-<div class="episode_grid mdl-grid">
+<div class="episode-grid mdl-grid">
     <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="episode-a-card episode-card mdl-card mdl-shadow--2dp">
             <a class="mdl-card__title" href="#" onclick="document.getElementById('episode-1-selected').click();">
                 <h2 class="mdl-card__title-text">S{{first_episode.season}}E{{first_episode.episode}}: {{first_episode.title}}</h2>
             </a>
-            <div class="mdl-card__supporting-text">
-                {{first_episode.plot}}
-            </div>
+            <div class="mdl-card__supporting-text">{{first_episode.plot}}</div>
             <!--<div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    {{first_episode.rating}}
-                </a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{first_episode.rating}}</a>
             </div>-->
             <div class="mdl-card__menu">
                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('episode-1-selected').click();">
@@ -89,13 +83,9 @@
             <a class="mdl-card__title" href="#" onclick="document.getElementById('episode-2-selected').click();">
                 <h2 class="mdl-card__title-text">S{{first_episode.season}}E{{first_episode.episode}}: {{second_episode.title}}</h2>
             </a>
-            <div class="mdl-card__supporting-text">
-                {{second_episode.plot}}
-            </div>
+            <div class="mdl-card__supporting-text">{{second_episode.plot}}</div>
             <!--<div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    {{second_episode.rating}}
-                </a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{second_episode.rating}}</a>
             </div>-->
             <div class="mdl-card__menu">
                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('episode-2-selected').click();">
@@ -110,14 +100,14 @@
     <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="skip-tie-card mdl-card mdl-shadow--2dp">
             <a class="skip-tie-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="document.getElementById('draw').click();">Tie
-        <i class="skipTieIcon material-icons">thumbs_up_down</i>
+        <i class="skip-tie-icon material-icons">thumbs_up_down</i>
         </a>
         </div>
     </div>
     <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="skip-tie-card mdl-card mdl-shadow--2dp">
             <a class="skip-tie-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="/">Skip
-        <i class="skipTieIcon material-icons">skip_next</i>
+        <i class="skip-tie-icon material-icons">skip_next</i>
         </a>
         </div>
     </div>
