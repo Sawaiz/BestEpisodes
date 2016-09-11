@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 
+{% block title_block %}
+    {{episode.series}} Season {{episode.season}} Episode {{episode.episode}}: {{episode.title}}
+{% endblock %}
+
+{% block head_block %}
+    <style type="text/css">
+        .rating-increase {
+            color: green
+        }
+        .rating-decrease {
+            color: red
+        }
+    </style>
+{% endblock %}
+
 {% block body_block %}
 
 <style>
@@ -36,7 +51,6 @@
             <div class="mdl-card__supporting-text">
                 {{episode.plot}}
             </div>
-
             <div class="mdl-card__menu">
                     <i class="material-icons">poll</i>
                     Rating: {{episode.rating}}                

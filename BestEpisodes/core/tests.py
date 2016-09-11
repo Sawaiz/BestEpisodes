@@ -59,3 +59,7 @@ class HomePageTest(TestCase):
 #Test for episode detail page
 
 #test deltas for games
+
+#rating history tests
+
+#test rating change over last 10 games is correct

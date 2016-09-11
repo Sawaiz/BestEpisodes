@@ -73,16 +73,20 @@ def episode_detail(request, episode_id, episode_slug):
     if episode_slug != episode.slug: #Ensures episode always appears with correct slug
         return HttpResponseRedirect('/episode/' + str(episode.id) + '/' + episode.slug)
     try:
-        games = Game.objects.filter(Q(player1=episode)| Q(player2=episode))[:10]
+        games = Game.objects.filter(Q(player1=episode)| Q(player2=episode)).order_by('-id')[:10]
+        if games[9].player1.id == episode.id:
+            rating_change = episode.rating - games[9].player1_pre
+        else:
+            rating_change = episode.rating - games[9].player2_pre
     except ObjectDoesNotExist:
         games = None
-    context = {'episode': episode, 'games':games}
+    context = {'episode': episode, 'games':games, 'rating_change':rating_change}
     return render(request, 'episode_detail.html', context)
 
 
 #Helper method to generate random episode IDs
 def get_episodes():
-    total_episodes = Episode.objects.all().count()
+    total_episodes = Episode.objects.count()
     episode_1 = random.randint(0, total_episodes - 1)
     episode_2 = random.randint(0, total_episodes - 1)
     while episode_1 == episode_2: #ensures random
