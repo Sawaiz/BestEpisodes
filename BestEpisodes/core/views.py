@@ -81,13 +81,25 @@ def episode_detail(request, episode_id, episode_slug):
         return HttpResponseRedirect('/episode/' + str(episode.id) + '/' + episode.slug)
     try:
         games = Game.objects.filter(Q(player1=episode)| Q(player2=episode)).order_by('-id')[:10]
-        if games[9].player1.id == episode.id:
-            rating_change = episode.rating - games[9].player1_pre
-        else:
-            rating_change = episode.rating - games[9].player2_pre
+        # Sometimes there are less than 10 games played, but the db still comes back
+        count = 9
+        while True:
+            try:
+                if games[count].player1.id == episode.id:
+                    rating_change = episode.rating - games[count].player1_pre
+                else:
+                    rating_change = episode.rating - games[count].player2_pre
+            except IndexError:
+                # If the episode exists, but there are no games played
+                if count == 0:
+                    rating_change = None
+                    break
+                count -= 1
+                continue
+            break
     except ObjectDoesNotExist:
         games = None
-    context = {'episode': episode, 'games':games, 'rating_change':rating_change}
+    context = {'episode': episode, 'games':games, 'rating_change':rating_change, 'series':episode.series}
     return render(request, 'episode_detail.html', context)
 
 
