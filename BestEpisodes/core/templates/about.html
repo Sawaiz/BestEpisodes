@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
-{% block title_block%}About Rate The Simpsons{% endblock %}
+{% block title_block%}About Rate {{seriesName}}{% endblock %}
 {% block body_block %}
-    <div class = "container">
-        <h1>About Rate The Simpsons</h1>
+    <div class="mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+        <h1>About Rate {{seriesName}}</h1>
         <h4>
-            <strong>How does Rate The Simpsons work?</strong>
+            <strong>How does Rate {{seriesName}} work?</strong>
         </h4>
             <p>
                 You are shown two randomly selected episodes, and you choose the better one (or say they're equally good).
@@ -63,6 +65,8 @@
                 using locally grown, cruelty-free farm-to-table craft-brewed organic Python code.
             </p>
 
+    </div>
+    <div class="mdl-layout-spacer"></div>
     </div>
 
 {% endblock %}

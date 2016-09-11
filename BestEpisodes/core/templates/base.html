@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <title>{% block title_block %}Rate The Simpsons {% endblock %}</title>
-    {% block head_block%}{% endblock %}
-</head>
-<body>
-    <nav>
-        <div class="nav-wrapper deep-orange lighten-1">
-          <a href="/" class="brand-logo hide-on-med-and-down">Rate The Simpsons</a>
-          <ul id="nav" class="right hide-on-med-and-down">
-            <li><a href="/rankings">Episode Rankings<i class="material-icons left">view_list</i></a></li>
-            <li><a href="/about">About<i class="material-icons left">info</i></a></li>
-          </ul>
-          <ul id="nav" class="left hide-on-med-and-up">
-            <li><a href="/"><i class="material-icons">home</i></a></li>
-            <li><a href="/rankings">Episodes<i class="material-icons left">view_list</i></a></li>
-            <li><a href="/about">About<i class="material-icons left">info</i></a></li>
-          </ul>
 
-        </div>
-      </nav>
-{% block body_block %}{% endblock %}
-    <script>
-     $(document).ready(function(){
-       // Activate the side menu
-       $(".button-collapse").sideNav();
-       console.log("clicked");
-      });
-    </script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Material Design Lite -->
+  <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <!-- Material Design icon font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <title>{% block title_block %}Rate {{seriesName}} {% endblock %}</title>
+  {% block head_block%}{% endblock %}
+</head>
+
+<body>
+  <!-- Always shows a header, save on smaller screens. -->
+  <div class="mdl-layout mdl-js-layout mdl-layout__header--scroll mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <a class="mdl-layout-icon mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"  href="/">
+        <i class="material-icons">home</i>
+      </a>
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title ">Rate {{seriesName}}</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="/rankings">
+          <i class="material-icons">view_list</i>
+          <a class="mdl-navigation__link mdl-layout--large-screen-only" href="/rankings">Episode Rankings</a>
+        </a>
+        <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="/about">
+          <i class="material-icons">info</i>
+          <a class="mdl-navigation__link mdl-layout--large-screen-only" href="/about">About</a>
+        </a>
+      </div>
+    </header>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        {% block body_block %}{% endblock %}
+      </div>
+    </main>
+  </div>
 </body>
+
 </html>

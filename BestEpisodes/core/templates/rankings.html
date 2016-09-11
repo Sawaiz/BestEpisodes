@@ -1,27 +1,41 @@
-{% extends 'base.html' %}
-{%block title_block%} The Simpsons Episode Rankings {% endblock %}
-{%block body_block%}
-<div class = "container">
-    <table class="striped centered">
-        <thead>
-            <tr>
-                <th data-field="rank">Rank</th>
-                <th data-field="id">Episode</th>
-                <th data-field="name">Title</th>
-                <th data-field="rating">Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for episode in episodes_list %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>S{{episode.season}}E{{episode.episode}}</td>
-                <td><a href="/episode/{{episode.id}}/">{{episode.title}}</a></td>
-                <td>{{episode.rating}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+{% extends 'base.html' %} {%block title_block%} {{seriesName}} Episode Rankings {% endblock %} {%block body_block%}
 
-    </table>
+<style>
+    .ranking-title {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .ranking-table {
+        width: 100%;
+    }
+</style>
+
+<div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <h3 class="ranking-title">{{seriesName}} Episode Rankings</h3>
+        <table class="ranking-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th data-field="rank">Rank</th>
+                    <th class="mdl-data-table__cell--non-numeric" data-field="id">Episode</th>
+                    <th class="mdl-data-table__cell--non-numeric" data-field="name">Title</th>
+                    <th class="mdl-data-table__header--sorted-descending" data-field="rating">Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for episode in episodes_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td class="mdl-data-table__cell--non-numeric">S{{episode.season}}E{{episode.episode}}</td>
+                    <td class="mdl-data-table__cell--non-numeric"><a href="/episode/{{episode.id}}/">{{episode.title}}</a></td>
+                    <td>{{episode.rating}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="mdl-layout-spacer"></div>
 </div>
 {% endblock %}
